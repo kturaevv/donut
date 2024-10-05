@@ -1,7 +1,24 @@
 import imageio
 import numpy as np
 
-from main import get_donut_vertices, write_vertex_to_buffer, settings
+from main import settings, write_vertex_to_buffer, Vertex
+
+
+def get_donut_vertices():
+    vertices = []
+    R = 1.0
+    r = 0.4
+    steps = 32
+
+    for theta in np.linspace(0, 2 * np.pi, steps * 2):
+        for phi in np.linspace(0, 2 * np.pi, steps):
+            x = (R + r * np.cos(phi)) * np.cos(theta)
+            y = (R + r * np.cos(phi)) * np.sin(theta)
+            z = r * np.sin(phi)
+            vertices.append(Vertex([x, y, z]))
+
+    return vertices
+
 
 if __name__ == "__main__":
     gif_writer = imageio.get_writer(

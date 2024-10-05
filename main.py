@@ -126,32 +126,3 @@ def write_vertex_to_buffer(vert: Vertex, data: np.ndarray, log: bool = False) ->
     write_to_screen_buffer(
         screen_proj_x, screen_proj_y, distance=vert.distance, data=data
     )
-
-
-def get_cube_vertices():
-    CUBE_SIZE = 20
-    vertices = []
-    for z in np.linspace(-1, 1, CUBE_SIZE):
-        for y in np.linspace(-1, 1, CUBE_SIZE):
-            for x in np.linspace(-1, 1, CUBE_SIZE):
-                v = Vertex([x, y, z])
-                # empty out cube
-                if abs(x) == 1 or abs(y) == 1 or abs(z) == 1:
-                    vertices.append(v)
-    return vertices
-
-
-def get_donut_vertices():
-    vertices = []
-    R = 1.0
-    r = 0.4
-    steps = 32
-
-    for theta in np.linspace(0, 2 * np.pi, steps * 2):
-        for phi in np.linspace(0, 2 * np.pi, steps):
-            x = (R + r * np.cos(phi)) * np.cos(theta)
-            y = (R + r * np.cos(phi)) * np.sin(theta)
-            z = r * np.sin(phi)
-            vertices.append(Vertex([x, y, z]))
-
-    return vertices
